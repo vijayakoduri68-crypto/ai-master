@@ -377,4 +377,35 @@ document.querySelectorAll('[data-goto="captions"]').forEach(function(button) {
 })();
 </script>
 
+<script>
+(function () {
+  const grid = document.querySelector('.tool-grid');
+  if (!grid || grid.querySelector('[data-caption-card]')) return;
+
+  const card = document.createElement('button');
+  card.className = 'tool-card';
+  card.setAttribute('data-caption-card', 'true');
+  card.innerHTML =
+    '<div class="tool-icon">💬</div>' +
+    '<b>Telugu Captions Generator</b>' +
+    '<p>తెలుగు క్యాప్షన్లు తయారు చేసి SRT లేదా TXTగా సేవ్ చేయండి.</p>';
+
+  card.addEventListener('click', function () {
+    document.querySelectorAll('.view').forEach(function (view) {
+      view.classList.toggle('active', view.id === 'view-captions');
+    });
+    document.querySelectorAll('.nav').forEach(function (nav) {
+      nav.classList.remove('active');
+    });
+    window.scrollTo(0, 0);
+  });
+
+  grid.appendChild(card);
+
+  document.querySelectorAll('button[data-goto="captions"]').forEach(function (button) {
+    if (!button.closest('.tool-grid')) button.remove();
+  });
+})();
+</script>
+
 </body></html>
