@@ -37,6 +37,37 @@
 <section class="view" id="view-editor"><div class="welcome"><div><div class="eyebrow">VIDEO WORKSPACE</div><h1 data-en="Edit your clip." data-te="నీ క్లిప్‌ను ఎడిట్ చేయి.">Edit your clip.</h1><p data-en="Upload a video, preview it and try a title overlay." data-te="వీడియో అప్‌లోడ్ చేసి ప్రివ్యూ చూడు, టైటిల్ జోడించు.">Upload a video, preview it and try a title overlay.</p></div><button class="secondary" data-goto="media">▧ Media library</button></div><div class="panel"><div class="panel-head"><h2 data-en="Preview canvas" data-te="ప్రివ్యూ కాన్వాస్">Preview canvas</h2><span>LOCAL</span></div><div class="panel-body"><div class="upload-zone" id="editorDrop"><div class="big">▣</div><strong data-en="Choose a video to preview" data-te="ప్రివ్యూ కోసం వీడియో ఎంచుకో">Choose a video to preview</strong><p data-en="Select a video file below" data-te="క్రింద వీడియో ఫైల్ ఎంచుకో">Select a video file below</p><input id="editorInput" type="file" accept="video/*"></div><div class="media-preview" id="editorPreview"></div><div class="row-fields"><div><label class="field-label" for="overlayText" data-en="Title overlay" data-te="వీడియో టైటిల్">Title overlay</label><input class="field" id="overlayText" placeholder="Your title / నీ టైటిల్"></div><div><label class="field-label" for="overlayColor" data-en="Title color" data-te="టైటిల్ రంగు">Title color</label><select class="field" id="overlayColor"><option value="#ffffff">White</option><option value="#26d9c2">Mint</option><option value="#c4a7ff">Lavender</option><option value="#ffd166">Yellow</option></select></div></div><div class="editor-tools"><button class="secondary" id="applyTitle">＋ Preview title</button><button class="secondary" id="removeTitle">Remove title</button><button class="secondary" id="downloadInfo">↓ Export edit notes</button></div><div class="notice" data-en="Prototype limitation: title is a preview overlay, not burned into the exported video. Full trimming, transitions and MP4 rendering are not implemented yet." data-te="ప్రోటోటైప్ పరిమితి: టైటిల్ ప్రివ్యూ ఓవర్లే మాత్రమే; ఎక్స్‌పోర్ట్ వీడియోలో కలపబడదు. పూర్తి ట్రిమ్మింగ్, ట్రాన్సిషన్లు, MP4 రెండరింగ్ ఇంకా అమలు కాలేదు.">Prototype limitation: title is a preview overlay, not burned into the exported video. Full trimming, transitions and MP4 rendering are not implemented yet.</div></div></div></section>
 <section class="view" id="view-media"><div class="welcome"><div><div class="eyebrow">ASSET LIBRARY</div><h1 data-en="Your media." data-te="నీ మీడియా.">Your media.</h1><p data-en="Files you select stay in this browser session." data-te="నువ్వు ఎంచుకున్న ఫైళ్లు ఈ బ్రౌజర్ సెషన్‌లోనే ఉంటాయి.">Files you select stay in this browser session.</p></div><button class="primary" id="mediaBrowse">＋ Add media</button></div><div class="panel"><div class="panel-head"><h2 data-en="Selected files" data-te="ఎంచుకున్న ఫైళ్లు">Selected files</h2><span id="mediaLabel">0 FILES</span></div><div class="panel-body" id="mediaLibrary"><div class="empty" data-en="No files yet. Add a video, image or audio file from the dashboard." data-te="ఇంకా ఫైళ్లు లేవు. డాష్‌బోర్డ్ నుంచి వీడియో, చిత్రం లేదా ఆడియో ఎంచుకో.">No files yet. Add a video, image or audio file from the dashboard.</div></div></div><input id="mediaBrowseInput" type="file" accept="video/*,image/*,audio/*" multiple hidden></section>
 <section class="view" id="view-projects"><div class="welcome"><div><div class="eyebrow">YOUR WORK</div><h1 data-en="My projects." data-te="నా ప్రాజెక్టులు.">My projects.</h1><p data-en="Download storyboard scripts to keep your ideas." data-te="నీ ఆలోచనలను ఉంచుకోవడానికి స్టోరీబోర్డ్ స్క్రిప్ట్‌లను డౌన్‌లోడ్ చేయి.">Download storyboard scripts to keep your ideas.</p></div><button class="primary" data-goto="create">＋ New storyboard</button></div><div class="panel"><div class="panel-head"><h2 data-en="Recent activity" data-te="ఇటీవలి పనులు">Recent activity</h2><span>LOCAL SESSION</span></div><div class="panel-body" id="projectLibrary"><div class="empty" data-en="Your generated storyboards will appear here during this session." data-te="ఈ సెషన్‌లో నువ్వు తయారు చేసిన స్టోరీబోర్డ్‌లు ఇక్కడ కనిపిస్తాయి.">Your generated storyboards will appear here during this session.</div></div></div></section>
+
+<section class="view" id="view-image">
+  <h1>✦ AI Image Generator</h1>
+  <p>నీకు కావాల్సిన చిత్రాన్ని వివరించు.</p>
+  <textarea id="imagePrompt" placeholder="ఉదా: అందమైన అరకు లోయ, ఉదయపు సూర్యకాంతి..."></textarea>
+  <p>
+    <label for="imageStyle">చిత్ర శైలి:</label>
+    <select id="imageStyle">
+      <option>Photorealistic</option>
+      <option>Cinematic</option>
+      <option>Digital art</option>
+      <option>Watercolor</option>
+      <option>3D illustration</option>
+      <option>Anime</option>
+    </select>
+  </p>
+  <p>
+    <label for="imageRatio">చిత్ర పరిమాణం:</label>
+    <select id="imageRatio">
+      <option value="1:1">Square</option>
+      <option value="9:16">Portrait</option>
+      <option value="16:9">Landscape</option>
+      <option value="4:5">Portrait post</option>
+    </select>
+  </p>
+  <button class="primary" id="generateImageBtn">Generate image</button>
+  <p id="imageStatus"></p>
+  <img id="generatedImage" alt="Generated image" style="display:none;max-width:100%;border-radius:12px">
+  <p><a id="downloadImage" style="display:none" download="ai-master-image.png">Download image</a></p>
+</section>
+
 </main></div>
 <nav class="mobile-nav"><button data-goto="home"><span>⌂</span>Home</button><button data-goto="create"><span>✦</span>Create</button><button data-goto="editor"><span>▣</span>Edit</button><button data-goto="media"><span>▧</span>Media</button><button data-goto="projects"><span>▤</span>Projects</button></nav><div class="toast" id="toast"></div></div>
 <script>
@@ -51,4 +82,57 @@ document.title = 'AI Master';
 const brand = document.querySelector('.brand > div:last-child');
 if (brand) brand.innerHTML = 'AI <span style="color:#a78bfa">Master</span><small>CREATE WITHOUT LIMITS</small>';
 // AI Master update</script>
+
+<script>
+document.getElementById("generateImageBtn").addEventListener("click", async () => {
+  const prompt = document.getElementById("imagePrompt").value.trim();
+  const status = document.getElementById("imageStatus");
+  const image = document.getElementById("generatedImage");
+  const download = document.getElementById("downloadImage");
+  const button = document.getElementById("generateImageBtn");
+
+  if (!prompt) {
+    status.textContent = "ముందుగా చిత్ర వివరణ రాయండి.";
+    return;
+  }
+
+  button.disabled = true;
+  status.textContent = "చిత్రం తయారవుతోంది. కొంతసేపు వేచి ఉండండి...";
+  image.style.display = "none";
+  download.style.display = "none";
+
+  try {
+    const response = await fetch(
+      "https://ai-master-api.vijayakoduri68.workers.dev/api/generate-image",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt,
+          style: document.getElementById("imageStyle").value,
+          aspectRatio: document.getElementById("imageRatio").value
+        })
+      }
+    );
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "చిత్రం తయారు కాలేదు.");
+
+    const src = "data:" + (data.mimeType || "image/png") +
+      ";base64," + data.imageBase64;
+
+    image.src = src;
+    image.style.display = "block";
+    download.href = src;
+    download.style.display = "inline";
+    status.textContent = "చిత్రం తయారైంది!";
+  } catch (error) {
+    status.textContent = "సమస్య: " + error.message;
+  } finally {
+    button.disabled = false;
+  }
+});
+</script>
+</body></html>
+
 </body></html>
