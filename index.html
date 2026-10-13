@@ -13,6 +13,66 @@
 <style>
 /* AI Master: keep the requested Dark Studio appearance on every device. */
 :root{color-scheme:dark;--bg:#0b0d12;--panel:#131720;--panel2:#191e29;--text:#f4f6fb;--muted:#9ca5b8;--line:#272e3c;--accent:#8b5cf6;--accent2:#26d9c2;--danger:#ef6682;--shadow:0 14px 35px #00000035}
+
+/* AI Master — Dark Studio polish */
+.main {
+  background:
+    radial-gradient(ellipse at 5% 0%, #8b5cf610, transparent 38%),
+    radial-gradient(ellipse at 100% 20%, #26d9c208, transparent 32%),
+    var(--bg);
+}
+
+.panel,
+.stat,
+.tool-card,
+.project {
+  box-shadow: 0 8px 28px #00000018;
+  transition: border-color .2s ease, box-shadow .2s ease,
+              transform .2s ease;
+}
+
+.panel:hover,
+.stat:hover,
+.project:hover {
+  border-color: #8b5cf655;
+  box-shadow: 0 12px 32px #00000028;
+}
+
+.primary {
+  transition: transform .18s ease, filter .18s ease;
+}
+
+.primary:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.secondary:hover {
+  border-color: #8b5cf6;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: #8b5cf655;
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
