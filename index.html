@@ -256,6 +256,104 @@ if (!response.ok) {
   }
 });
 </script>
+
+<button class="secondary" data-goto="captions">💬 Telugu Captions Generator</button>
+
+<section class="view" id="view-captions">
+  <div class="panel" style="margin:20px 0;padding:20px">
+    <h2>తెలుగు క్యాప్షన్స్ జనరేటర్</h2>
+    <p>ప్రతి క్యాప్షన్‌ను కొత్త లైన్‌లో రాయండి.</p>
+
+    <textarea id="captionText" class="textarea" rows="6" placeholder="నమస్కారం అందరికీ!&#10;మన తెలుగు ప్రపంచానికి స్వాగతం."></textarea>
+
+    <p>ప్రతి క్యాప్షన్ సమయం</p>
+    <select id="captionDuration" class="field">
+      <option value="2">2 సెకన్లు</option>
+      <option value="3" selected>3 సెకన్లు</option>
+      <option value="4">4 సెకన్లు</option>
+      <option value="5">5 సెకన్లు</option>
+    </select>
+
+    <p>టెక్స్ట్ రంగు</p>
+    <select id="captionStyle" class="field">
+      <option value="#ffffff">తెలుపు</option>
+      <option value="#26d9c2">మింట్</option>
+      <option value="#ffd166">పసుపు</option>
+    </select>
+
+    <div class="btn-row">
+      <button class="primary" id="makeCaptions">క్యాప్షన్లు తయారు చేయి</button>
+      <button class="secondary" id="downloadSrt">SRT డౌన్‌లోడ్</button>
+      <button class="secondary" id="downloadCaptionTxt">TXT డౌన్‌లోడ్</button>
+    </div>
+
+    <div id="captionPreview" class="caption-preview"></div>
+    <p id="captionStatus" class="hint"></p>
+  </div>
+</section>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  let lines = [];
+
+  function time(s){
+    const h = Math.floor(s / 3600);
+    const m = Math.floor(s % 3600 / 60);
+    const sec = s % 60;
+    return [h,m,sec].map(n => String(n).padStart(2,'0')).join(':') + ',000';
+  }
+
+  function build(){
+    lines = $('captionText').value.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const box = $('captionPreview');
+    box.innerHTML = '';
+    if(!lines.length){
+      $('captionStatus').textContent = 'ముందుగా తెలుగు టెక్స్ట్ రాయండి.';
+      return;
+    }
+
+    const duration = Number($('captionDuration').value);
+    lines.forEach((line,i) => {
+      const item = document.createElement('div');
+      item.className = 'caption-item';
+      item.style.color = $('captionStyle').value;
+      item.textContent = time(i*duration) + ' — ' + line;
+      box.appendChild(item);
+    });
+    $('captionStatus').textContent = lines.length + ' క్యాప్షన్లు సిద్ధంగా ఉన్నాయి.';
+  }
+
+  function save(name,text){
+    const a = document.createElement('a');
+    const url = URL.createObjectURL(new Blob(['\ufeff',text],{type:'text/plain;charset=utf-8'}));
+    a.href = url;
+    a.download = name;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url),1000);
+  }
+
+  $('makeCaptions').addEventListener('click',build);
+  $('captionStyle').addEventListener('change',build);
+  $('captionDuration').addEventListener('change',build);
+
+  $('downloadSrt').addEventListener('click',() => {
+    if(!lines.length) build();
+    if(lines.length){
+      const d = Number($('captionDuration').value);
+      save('telugu-captions.srt',lines.map((line,i) =>
+        (i+1)+'\n'+time(i*d)+' --> '+time((i+1)*d)+'\n'+line
+      ).join('\n\n'));
+    }
+  });
+
+  $('downloadCaptionTxt').addEventListener('click',() => {
+    if(!lines.length) build();
+    if(lines.length) save('telugu-captions.txt',lines.join('\n'));
+  });
+})();
+</script>
+
 </body></html>
 
 </body></html>
