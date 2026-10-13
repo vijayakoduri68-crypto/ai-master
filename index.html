@@ -115,9 +115,13 @@ document.getElementById("generateImageBtn").addEventListener("click", async () =
       }
     );
 
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || "చిత్రం తయారు కాలేదు.");
-
+    
+  const data = await response.json();
+if (!response.ok) {
+  throw new Error(
+    data.details || data.error || `Image service error (${response.status})`
+  );
+}
     const src = "data:" + (data.mimeType || "image/png") +
       ";base64," + data.imageBase64;
 
