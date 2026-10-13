@@ -356,4 +356,15 @@ if (!response.ok) {
 
 </body></html>
 
+<script>
+document.querySelectorAll('[data-goto="captions"]').forEach(function(button) {
+  button.addEventListener('click', function() {
+    document.querySelectorAll('.view').forEach(function(view) {
+      view.classList.toggle('active', view.id === 'view-captions');
+    });
+    window.scrollTo(0, 0);
+  });
+});
+</script>
+
 </body></html>
