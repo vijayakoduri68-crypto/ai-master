@@ -465,10 +465,8 @@ document.querySelectorAll('[data-goto="captions"]').forEach(function(button) {
     const te = select.value === 'te';
 
     if (heading) {
-      heading.textContent = te
-        ? 'తెలుగు క్యాప్షన్స్ తయారు చేయండి'
-        : 'Multilingual Captions Generator';
-    }
+  heading.textContent = 'Caption Generator';
+}
 
     if (intro) {
       intro.textContent = te
