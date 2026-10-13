@@ -367,4 +367,14 @@ document.querySelectorAll('[data-goto="captions"]').forEach(function(button) {
 });
 </script>
 
+<script>
+(function () {
+  const captions = document.getElementById('view-captions');
+  const main = document.querySelector('.main');
+  if (captions && main && captions.parentElement !== main) {
+    main.appendChild(captions);
+  }
+})();
+</script>
+
 </body></html>
