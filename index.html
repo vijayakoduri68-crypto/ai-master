@@ -508,5 +508,56 @@ if (txt) txt.textContent = '↓ Download TXT';
   }
 })();
 </script>
+<script>
+(function () {
+  const root = document.getElementById('view-captions');
+  if (!root) return;
 
+  function keepEnglish() {
+    const text = {
+      '.welcome h1': 'Caption Generator',
+      '.eyebrow': 'CAPTION STUDIO',
+      '.welcome p': 'Paste your text, choose a caption language, and export SRT or TXT.',
+      '.panel-head h2': '💬 Caption Builder',
+      'label[for="captionText"]': 'Paste your text (one caption per line)',
+      'label[for="captionDuration"]': 'Seconds per caption',
+      'label[for="captionStyle"]': 'Preview text color',
+      'label[for="captionLanguage"]': 'Caption language',
+      '.caption-help': 'This tool formats your text; it does not translate text or transcribe audio automatically.'
+    };
+
+    Object.entries(text).forEach(([selector, value]) => {
+      const el = root.querySelector(selector);
+      if (el) el.textContent = value;
+    });
+
+    const buttons = {
+      makeCaptions: '✦ Generate captions',
+      clearCaptions: 'Clear',
+      downloadSrt: '↓ Download SRT',
+      downloadCaptionTxt: '↓ Download TXT'
+    };
+
+    Object.entries(buttons).forEach(([id, value]) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    });
+
+    const card = document.querySelector('[data-caption-card]');
+    if (card) {
+      const title = card.querySelector('b');
+      const description = card.querySelector('p');
+      if (title) title.textContent = 'Caption Generator';
+      if (description) {
+        description.textContent = 'Create captions in different languages and export SRT or TXT files.';
+      }
+    }
+  }
+
+  keepEnglish();
+  document.getElementById('langBtn')?.addEventListener('click', () => setTimeout(keepEnglish, 0));
+  document.getElementById('makeCaptions')?.addEventListener('click', () => setTimeout(keepEnglish, 0));
+  document.getElementById('captionLanguage')?.addEventListener('change', keepEnglish);
+})();
+</script>
 </body></html>
