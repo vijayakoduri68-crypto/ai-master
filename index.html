@@ -491,12 +491,10 @@ document.querySelectorAll('[data-goto="captions"]').forEach(function(button) {
     const srt = document.getElementById('downloadSrt');
     const txt = document.getElementById('downloadCaptionTxt');
 
-   ```javascript
 if (make) make.textContent = '✦ Generate captions';
 if (clear) clear.textContent = 'Clear';
 if (srt) srt.textContent = '↓ Download SRT';
 if (txt) txt.textContent = '↓ Download TXT';
-```
   }
 
   select.addEventListener('change', updateLanguage);
