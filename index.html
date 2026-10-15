@@ -469,17 +469,12 @@ document.querySelectorAll('[data-goto="captions"]').forEach(function(button) {
 }
 
     if (intro) {
-      intro.textContent = te
-        ? 'మీ టెక్స్ట్‌ను క్యాప్షన్లుగా మార్చి SRT లేదా TXTగా సేవ్ చేయండి.'
-        : 'Paste text in your chosen language, then export SRT or TXT.';
-    }
+  intro.textContent = 'Paste your text, choose a caption language, and export SRT or TXT.';
+}
 
-    if (inputLabel) {
-      inputLabel.textContent = te
-        ? 'మీ టెక్స్ట్‌ను పేస్ట్ చేయండి (ప్రతి క్యాప్షన్ కొత్త లైన్‌లో)'
-        : 'Paste your text (one caption per line)';
-    }
-
+   if (inputLabel) {
+  inputLabel.textContent = 'Paste your text (one caption per line)';
+}
     if (durationLabel) {
       durationLabel.textContent = te
         ? 'ప్రతి క్యాప్షన్ సమయం (సెకన్లు)'
@@ -496,10 +491,12 @@ document.querySelectorAll('[data-goto="captions"]').forEach(function(button) {
     const srt = document.getElementById('downloadSrt');
     const txt = document.getElementById('downloadCaptionTxt');
 
-    if (make) make.textContent = te ? '✦ క్యాప్షన్లు తయారు చేయి' : '✦ Generate captions';
-    if (clear) clear.textContent = te ? 'తొలగించు' : 'Clear';
-    if (srt) srt.textContent = te ? '↓ SRT డౌన్‌లోడ్' : '↓ Download SRT';
-    if (txt) txt.textContent = te ? '↓ TXT డౌన్‌లోడ్' : '↓ Download TXT';
+   ```javascript
+if (make) make.textContent = '✦ Generate captions';
+if (clear) clear.textContent = 'Clear';
+if (srt) srt.textContent = '↓ Download SRT';
+if (txt) txt.textContent = '↓ Download TXT';
+```
   }
 
   select.addEventListener('change', updateLanguage);
