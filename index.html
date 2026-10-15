@@ -264,7 +264,7 @@ if (!response.ok) {
    <h1>Caption Generator</h1>
     <p>Paste your captions here, one per line.</p>
 
-    <textarea id="captionText" class="textarea" rows="6" placeholder="నమస్కారం అందరికీ!&#10;మన తెలుగు ప్రపంచానికి స్వాగతం."></textarea>
+    <textarea id="captionText" class="textarea" rows="6" placeholder="Hello everyone!&#10;Welcome to our AI world."></textarea>
 
     <p>Seconds per caption</p>
     <select id="captionDuration" class="field">
@@ -309,7 +309,7 @@ if (!response.ok) {
     const box = $('captionPreview');
     box.innerHTML = '';
     if(!lines.length){
-      $('captionStatus').textContent = 'ముందుగా తెలుగు టెక్స్ట్ రాయండి.';
+      $('captionStatus').textContent = 'Please enter your caption text first.';
       return;
     }
 
