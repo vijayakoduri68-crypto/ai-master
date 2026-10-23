@@ -560,4 +560,152 @@ if (txt) txt.textContent = '↓ Download TXT';
   document.getElementById('captionLanguage')?.addEventListener('change', keepEnglish);
 })();
 </script>
+
+<script>
+(function () {
+  const main = document.querySelector('.main');
+  if (!main || document.getElementById('view-voice')) return;
+
+  const button = document.createElement('button');
+  button.className = 'secondary';
+  button.style.margin = '0 0 16px 10px';
+  button.textContent = '🎙️ Telugu AI Voice';
+  button.onclick = function () {
+    document.querySelectorAll('.view').forEach(v =>
+      v.classList.toggle('active', v.id === 'view-voice')
+    );
+    document.querySelectorAll('.nav').forEach(v =>
+      v.classList.remove('active')
+    );
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const section = document.createElement('section');
+  section.className = 'view';
+  section.id = 'view-voice';
+  section.innerHTML = `
+    <div class="welcome">
+      <div>
+        <div class="eyebrow">TELUGU VOICE STUDIO</div>
+        <h1>తెలుగు AI వాయిస్ జనరేటర్</h1>
+        <p>తెలుగు టెక్స్ట్‌ను వాయిస్‌గా వినండి.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <h2>🎙️ Text to Speech</h2>
+        <span>BROWSER VOICE</span>
+      </div>
+      <div class="panel-body">
+        <label class="field-label" for="voiceText">
+          మీ తెలుగు టెక్స్ట్
+        </label>
+        <textarea class="textarea" id="voiceText">నమస్కారం! ఇది AI మాస్టర్ తెలుగు వాయిస్ జనరేటర్.</textarea>
+        <div class="row-fields">
+          <div>
+            <label class="field-label" for="voiceChoice">వాయిస్</label>
+            <select class="field" id="voiceChoice"></select>
+          </div>
+          <div>
+            <label class="field-label" for="voiceSpeed">వేగం</label>
+            <select class="field" id="voiceSpeed">
+              <option value="0.7">నెమ్మదిగా</option>
+              <option value="1" selected>సాధారణం</option>
+              <option value="1.2">వేగంగా</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="primary" id="voiceSpeak">▶ వాయిస్ వినండి</button>
+          <button class="secondary" id="voicePause">⏸ Pause</button>
+          <button class="secondary" id="voiceStop">■ Stop</button>
+        </div>
+        <p class="hint" id="voiceStatus">
+          వాయిస్ సిద్ధమవుతోంది...
+        </p>
+        <div class="notice">
+          ఈ వెర్షన్ బ్రౌజర్ వాయిస్‌ను ఉపయోగిస్తుంది.
+          MP3 డౌన్‌లోడ్ ఇంకా అందుబాటులో లేదు.
+        </div>
+      </div>
+    </div>`;
+
+  main.insertBefore(section, main.firstChild);
+  main.insertBefore(button, section);
+
+  const synth = window.speechSynthesis;
+  const choice = document.getElementById('voiceChoice');
+  const status = document.getElementById('voiceStatus');
+
+  function loadVoices() {
+    const voices = synth.getVoices();
+    choice.innerHTML = '';
+    voices.forEach((voice, index) => {
+      const option = document.createElement('option');
+      option.value = index;
+      option.textContent = voice.name + ' (' + voice.lang + ')';
+      choice.appendChild(option);
+    });
+
+    const teluguIndex = voices.findIndex(v =>
+      v.lang.toLowerCase().startsWith('te')
+    );
+
+    if (teluguIndex >= 0) {
+      choice.value = teluguIndex;
+      status.textContent = 'తెలుగు వాయిస్ అందుబాటులో ఉంది.';
+    } else {
+      status.textContent =
+        'తెలుగు వాయిస్ కనిపించలేదు. పరికరంలో Telugu voice ఉంటే అందుబాటులోకి వస్తుంది.';
+    }
+  }
+
+  loadVoices();
+  if (synth.onvoiceschanged !== undefined) {
+    synth.onvoiceschanged = loadVoices;
+  }
+
+  document.getElementById('voiceSpeak').onclick = function () {
+    const text = document.getElementById('voiceText').value.trim();
+    if (!text) {
+      status.textContent = 'ముందుగా టెక్స్ట్ రాయండి.';
+      return;
+    }
+
+    synth.cancel();
+    const speech = new SpeechSynthesisUtterance(text);
+    const voices = synth.getVoices();
+    const selected = voices[Number(choice.value)];
+
+    speech.lang = selected ? selected.lang : 'te-IN';
+    if (selected) speech.voice = selected;
+    speech.rate = Number(
+      document.getElementById('voiceSpeed').value
+    );
+
+    speech.onstart = () => status.textContent = 'వాయిస్ ప్లే అవుతోంది...';
+    speech.onend = () => status.textContent = 'పూర్తయింది.';
+    speech.onerror = () =>
+      status.textContent = 'వాయిస్ ప్లే కాలేదు. మరో వాయిస్ ప్రయత్నించండి.';
+
+    synth.speak(speech);
+  };
+
+  document.getElementById('voicePause').onclick = function () {
+    if (synth.speaking && !synth.paused) {
+      synth.pause();
+      status.textContent = 'Pause అయింది. మళ్లీ వినడానికి Play నొక్కండి.';
+    } else if (synth.paused) {
+      synth.resume();
+      status.textContent = 'వాయిస్ మళ్లీ ప్లే అవుతోంది...';
+    }
+  };
+
+  document.getElementById('voiceStop').onclick = function () {
+    synth.cancel();
+    status.textContent = 'వాయిస్ ఆగిపోయింది.';
+  };
+})();
+</script>
+
 </body></html>
