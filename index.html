@@ -161,6 +161,19 @@ textarea:focus-visible {
   <h1>✦ AI Image Generator</h1>
   <p>నీకు కావాల్సిన చిత్రాన్ని వివరించు.</p>
   <textarea id="imagePrompt" placeholder="ఉదా: అందమైన అరకు లోయ, ఉదయపు సూర్యకాంతి..."></textarea>
+  <div class="btn-row">
+  <button class="secondary" type="button" onclick="
+    const p=document.getElementById('imagePrompt');
+    const s=document.getElementById('imageStyle').value;
+    const r=document.getElementById('imageRatio').value;
+    if(!p.value.trim()){p.value='Cinematic sunrise over Araku Valley, misty green hills';}
+    p.value += ', '+s+' style, detailed composition, '+r+' aspect ratio, high quality';
+  ">✦ Improve Prompt</button>
+  <button class="secondary" type="button" onclick="document.getElementById('imagePrompt').value='Cinematic sunrise over Araku Valley, lush green hills, soft morning mist, natural colors';">🌄 Araku Valley</button>
+  <button class="secondary" type="button" onclick="document.getElementById('imagePrompt').value='Eye-catching YouTube thumbnail, dramatic lighting, strong contrast, clear subject, cinematic composition';">🎬 YouTube Thumbnail</button>
+  <button class="secondary" type="button" onclick="document.getElementById('imagePrompt').value='Premium product photo, clean background, studio lighting, realistic shadows, sharp focus';">🛍️ Product Photo</button>
+  <button class="secondary" type="button" onclick="document.getElementById('imagePrompt').value='Magical fantasy landscape, glowing atmosphere, detailed digital art, dramatic light rays';">🌌 Fantasy Art</button>
+</div>
   <p>
     <label for="imageStyle">చిత్ర శైలి:</label>
     <select id="imageStyle">
