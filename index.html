@@ -159,7 +159,7 @@ textarea:focus-visible {
 
 <section class="view" id="view-image">
   <h1>✦ AI Image Generator</h1>
-  <p>నీకు కావాల్సిన చిత్రాన్ని వివరించు.</p>
+  <p>Describe the image you want.</p>
   <textarea id="imagePrompt" placeholder="ఉదా: అందమైన అరకు లోయ, ఉదయపు సూర్యకాంతి..."></textarea>
   <div class="btn-row">
   <button class="secondary" type="button" onclick="
@@ -175,7 +175,7 @@ textarea:focus-visible {
   <button class="secondary" type="button" onclick="document.getElementById('imagePrompt').value='Magical fantasy landscape, glowing atmosphere, detailed digital art, dramatic light rays';">🌌 Fantasy Art</button>
 </div>
   <p>
-    <label for="imageStyle">చిత్ర శైలి:</label>
+    <label for="imageStyle">Image Style:</label>
     <select id="imageStyle">
       <option>Photorealistic</option>
       <option>Cinematic</option>
@@ -186,7 +186,7 @@ textarea:focus-visible {
     </select>
   </p>
   <p>
-    <label for="imageRatio">చిత్ర పరిమాణం:</label>
+    <label for="imageRatio">Image Size:</label>
     <select id="imageRatio">
       <option value="1:1">Square</option>
       <option value="9:16">Portrait</option>
@@ -229,7 +229,7 @@ document.getElementById("generateImageBtn").addEventListener("click", async () =
   }
 
   button.disabled = true;
-  status.textContent = "చిత్రం తయారవుతోంది. కొంతసేపు వేచి ఉండండి...";
+  status.textContent = "Generating your image. Please wait a moment...";
   image.style.display = "none";
   download.style.display = "none";
 
@@ -261,7 +261,7 @@ if (!response.ok) {
     image.style.display = "block";
     download.href = src;
     download.style.display = "inline";
-    status.textContent = "చిత్రం తయారైంది!";
+    status.textContent = "Your image is ready!";
   } catch (error) {
     status.textContent = "సమస్య: " + error.message;
   } finally {
